@@ -18,8 +18,8 @@ type configOption func(*dialConfig)
 
 func WithNetwork(network string) configOption {
 	switch network {
-	// IP is unsupported at the moment
-	case "tcp", "tcp4", "tcp6", "udp", "udp4", "udp6":
+	// IP and IPv6 is unsupported at the moment
+	case "tcp", "tcp4", "udp", "udp4":
 		break
 	default:
 		return nil
