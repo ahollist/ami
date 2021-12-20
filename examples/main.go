@@ -7,7 +7,7 @@ import (
 
 func main() {
 	fmt.Println("Testing Internet connection")
-	if ami.Online() {
+	if online, _ := ami.Online(); online {
 		fmt.Println("Internet is connected!")
 	} else {
 		fmt.Println("Internet is not connected")
