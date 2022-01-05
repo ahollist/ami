@@ -9,7 +9,7 @@ func Online(opts ...onlineOption) (bool, error) {
 	for _, opt := range opts {
 		opt(&conf)
 	}
-	_, err := net.Dial(conf.Network(), conf.AddressAndPortString())
+	_, err := net.DialTimeout(conf.Network(), conf.AddressAndPortString(), conf.Timeout())
 	if err == nil {
 		return true, nil
 	}
