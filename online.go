@@ -11,9 +11,16 @@ func Online(opts ...onlineOption) (bool, error) {
 			opt(&conf)
 		}
 	}
-	_, err := net.DialTimeout(conf.Network(), conf.AddressAndPortString(), conf.Timeout())
+	c, err := net.DialTimeout(conf.ExportDialParams()) // do I need to close this instead
 	if err == nil {
 		return true, nil
 	}
+	c.Close()
 	return false, err
 }
+
+// needs test for:
+// localhost
+// 8.8.8.8:53
+// Invalid info
+//

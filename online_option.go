@@ -16,7 +16,14 @@ var defaultConfig = dialConfig{
 	timeout: 0,
 }
 
-func (dc dialConfig) AddressAndPortString() string {
+func (dc dialConfig) ExportDialParams() (network, addressAndPort string, timeout time.Duration) { // needs test
+	// Resolve Address+Port String first
+	// Update Network if required
+	return dc.Network(), dc.AddressAndPortString(), dc.Timeout()
+}
+
+func (dc dialConfig) AddressAndPortString() string { // needs test
+	// todo: parse address and set network/port information appropriately (e.g. "www.google.com:http")
 	return dc.address + ":" + dc.port
 }
 
@@ -30,7 +37,7 @@ func (dc dialConfig) Timeout() time.Duration {
 
 type onlineOption func(*dialConfig)
 
-func WithNetwork(network string) onlineOption {
+func WithNetwork(network string) onlineOption { // needs test
 	switch network {
 	// IP and IPv6 is unsupported at the moment
 	case "tcp", "tcp4", "udp", "udp4":
