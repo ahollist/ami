@@ -3,8 +3,8 @@ package ami
 import "net"
 
 // Online takes a variadic number of options
-// Online returns a boolean for the connection status and any applicable errors from the connection attempt
-func Online(opts ...onlineOption) (bool, error) {
+// Online returns a boolean for the connection status, after calling Online you can check for any errors with
+func Online(opts ...onlineOption) bool {
 	conf := defaultConfig
 	for _, opt := range opts {
 		if opt != nil {
@@ -13,10 +13,10 @@ func Online(opts ...onlineOption) (bool, error) {
 	}
 	c, err := net.DialTimeout(conf.ExportDialParams()) // do I need to close this instead
 	if err == nil {
-		return true, nil
+		return true
 	}
 	c.Close()
-	return false, err
+	return false
 }
 
 // needs test for:
