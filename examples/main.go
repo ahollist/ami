@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github/ami"
+
+	"github.com/ahollist/ami"
 )
 
 func main() {
